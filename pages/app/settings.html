@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="../../css/settings.css">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous">
+</head>
+<body>
+  <main class="wrap" role="main" aria-labelledby="settingsHeading">
+
+    <!-- Header -->
+    <header class="settingsHeader" id="settingsHeader">
+      <h1 id="settingsHeading">Settings</h1>
+      <div class="controls" role="region" aria-label="Settings controls">
+        <button id="goBackBtn" class="btn" aria-label="Go back to chat page">⬅ Go Back</button>
+      </div>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="settingsSection" id="profileSection">
+      <h2 class="sectionTitle">
+        <i class="fa-solid fa-user"></i> Profile
+        <button class="collapseBtn" aria-label="Toggle Profile Section">▼</button>
+      </h2>
+      <div class="sectionContent">
+        <div class="settingItem">
+          <label for="profilePic">Profile Picture</label>
+          <input type="file" id="profilePic" accept="image/*">
+          <img id="profilePreview" src="default.png" alt="Profile Preview">
+        </div>
+        <div class="settingItem">
+          <label for="usernameInput">Username</label>
+          <input type="text" id="usernameInput" placeholder="Enter your username">
+        </div>
+        <div class="settingItem">
+          <label for="emailInput">Email</label>
+          <input type="email" id="emailInput" placeholder="Enter your email">
+        </div>
+        <div class="settingItem">
+          <label for="currentPassword">Current Password</label>
+          <input type="password" id="currentPassword">
+        </div>
+        <div class="settingItem">
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword">
+        </div>
+        <div class="settingItem">
+          <button class="btn saveBtn">Save Profile</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notifications Section -->
+    <section class="settingsSection" id="notificationsSection">
+      <h2 class="sectionTitle">
+        <i class="fa-solid fa-bell"></i> Notifications
+        <button class="collapseBtn" aria-label="Toggle Notifications Section">▼</button>
+      </h2>
+      <div class="sectionContent">
+        <div class="settingItem">
+          <input type="checkbox" id="notifMessages">
+          <label for="notifMessages">Message Notifications</label>
+        </div>
+        <div class="settingItem">
+          <input type="checkbox" id="notifMentions">
+          <label for="notifMentions">Mentions & Tags</label>
+        </div>
+        <div class="settingItem">
+          <input type="checkbox" id="notifUpdates">
+          <label for="notifUpdates">App Updates</label>
+        </div>
+        <div class="settingItem">
+          <label for="dndStart">Do Not Disturb Start</label>
+          <input type="time" id="dndStart">
+        </div>
+        <div class="settingItem">
+          <label for="dndEnd">Do Not Disturb End</label>
+          <input type="time" id="dndEnd">
+        </div>
+        <div class="settingItem">
+          <label for="notifVolume">Notification Volume</label>
+          <input type="range" id="notifVolume" min="0" max="100">
+        </div>
+      </div>
+    </section>
+
+    <!-- App Preferences Section -->
+    <section class="settingsSection" id="preferencesSection">
+      <h2 class="sectionTitle">
+        <i class="fa-solid fa-cog"></i> App Preferences
+        <button class="collapseBtn" aria-label="Toggle Preferences Section">▼</button>
+      </h2>
+      <div class="sectionContent">
+        <div class="settingItem">
+          <label for="themeSelect">Theme</label>
+          <select id="themeSelect" class="select">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto</option>
+          </select>
+        </div>
+        <div class="settingItem">
+          <label for="languageSelect">Language</label>
+          <select id="languageSelect" class="select">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+          </select>
+        </div>
+        <div class="settingItem">
+          <label for="fontSizeSelect">Font Size</label>
+          <select id="fontSizeSelect" class="select">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+        <div class="settingItem">
+          <label for="layoutSelect">Layout</label>
+          <select id="layoutSelect" class="select">
+            <option value="grid">Grid</option>
+            <option value="list">List</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security & Privacy Section -->
+    <section class="settingsSection" id="securitySection">
+      <h2 class="sectionTitle">
+        <i class="fa-solid fa-shield"></i> Security & Privacy
+        <button class="collapseBtn" aria-label="Toggle Security Section">▼</button>
+      </h2>
+      <div class="sectionContent">
+        <div class="settingItem">
+          <input type="checkbox" id="twoFA">
+          <label for="twoFA">Enable Two-Factor Authentication</label>
+        </div>
+        <div class="settingItem">
+          <input type="checkbox" id="profileVisibility">
+          <label for="profileVisibility">Show profile to others</label>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JS file -->
+  <script src="../../js/settings.js" defer></script>
+</body>
+</html>

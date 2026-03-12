@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Archive</title>
+
+  <!-- Main CSS file -->
+  <link rel="stylesheet" href="../../css/archive.css">
+
+  <!-- Optional icons (Font Awesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous">
+</head>
+<body>
+  <main class="wrap" role="main" aria-labelledby="archiveHeading">
+    <header class="archiveHeader" id="archiveHeader">
+      <h1 id="archiveHeading">Archive</h1>
+
+      <div class="controls" role="region" aria-label="Archive controls">
+         <!-- Go back button -->
+         <button id="goBackBtn" class="btn" aria-label="Go back to chat page">⬅ Go Back</button>
+
+        <!-- Search input -->
+        <label for="search" class="visually-hidden">Search archive</label>
+        <input id="search" class="searchInput" type="search" placeholder="Search title or community" aria-label="Search archive">
+
+        <!-- Community filter -->
+        <label for="filterCommunity" class="visually-hidden">Filter by community</label>
+        <select id="filterCommunity" class="select" aria-label="Filter by community">
+          <option value="">All communities</option>
+        </select>
+
+        <!-- Sorting options -->
+        <label for="sortBy" class="visually-hidden">Sort archive</label>
+        <select id="sortBy" class="select" aria-label="Sort archive">
+          <option value="new">Newest</option>
+          <option value="old">Oldest</option>
+        </select>
+      </div>
+    </header>
+
+    <section id="content" aria-live="polite" aria-busy="false">
+      <!-- Archive items grid -->
+      <div id="grid" class="archiveGrid" aria-label="Archived items grid"></div>
+
+      <!-- Pagination buttons -->
+      <div id="pagination" class="pagination" aria-label="Pagination"></div>
+
+      <!-- Empty state -->
+      <div id="empty" class="empty" role="status" aria-live="polite" hidden>No archived items found.</div>
+    </section>
+  </main>
+
+  <!-- Preview modal -->
+<div id="previewModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="previewPanel" role="document">
+    <div class="previewTop">
+      <div>
+        <h2 id="previewTitle" class="previewTitle"></h2>
+        <div id="previewMeta" class="sub" aria-hidden="false"></div>
+      </div>
+      <button id="closePreview" class="closePreview" aria-label="Close preview">✕</button>
+    </div>
+
+    <div class="previewPlayer" aria-live="polite" style="margin-top:12px;">
+      <!-- Replace <video> with a dynamic container -->
+      <div id="previewVideo" aria-label="Preview video"></div>
+    </div>
+  </div>
+</div>
+
+  <!-- JS file -->
+  <script src="../../js/archive.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+    border: 2px solid #f85f73;
+}
+
+.callsPage h1 {
+    text-align: center;
+    color: #f85f73;
+}
+
+#callsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.callItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.callItem:hover {
+    background: #ffe6eb;
+}
+
+.callDetails .callName {
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.callDetails .callInfo {
+    font-size: 0.85em;
+    color: gray;
+}

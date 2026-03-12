@@ -1,0 +1,485 @@
+/* Theme tokens */
+:root {
+  --accent: rgba(248,95,115,1);
+  --accent-weak: rgba(248,95,115,0.12);
+  --radius: 12px;
+  --gap: 12px;
+  --ui-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Header container */
+.settingsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Heading */
+#settingsHeading {
+  font-size: 22px;
+  color: var(--accent);
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* Controls container */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Go Back button */
+#goBackBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--accent), #ff8aa0);
+  color: #02121a;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+#goBackBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(248,95,115,0.08);
+}
+
+/* Focus state for accessibility */
+#goBackBtn:focus {
+  outline: 3px solid rgba(248,95,115,0.14);
+  outline-offset: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  .settingsHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  #goBackBtn {
+    width: 100%;
+  }
+}
+/* Section container */
+.settingsSection {
+  background: rgba(248,95,115,0.04); /* soft panel background */
+  border: 1px solid rgba(248,95,115,0.12);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.12s ease;
+}
+
+.settingsSection:hover {
+  box-shadow: 0 8px 20px rgba(248,95,115,0.08);
+}
+
+/* Section title */
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 12px 0;
+}
+
+.sectionTitle i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.collapseBtn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+.collapseBtn:hover {
+  transform: rotate(180deg);
+}
+
+/* Section content */
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual setting items */
+.settingItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Labels */
+.settingItem label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+/* Inputs */
+.settingItem input[type="text"],
+.settingItem input[type="email"],
+.settingItem input[type="password"],
+.settingItem input[type="file"] {
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0,0,0,0.1);
+  font-size: 14px;
+  width: 100%;
+  transition: box-shadow 0.12s ease, transform 0.08s ease;
+}
+
+.settingItem input:focus {
+  outline: none;
+  box-shadow: 0 6px 20px rgba(248,95,115,0.08);
+  transform: translateY(-1px);
+}
+
+/* Profile preview image */
+#profilePreview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(248,95,115,0.3);
+  margin-top: 6px;
+}
+
+/* Save button */
+.saveBtn {
+  padding: 10px 14px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  border: 0;
+  background: linear-gradient(90deg, var(--accent), #ff8aa0);
+  color: #02121a;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.saveBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(248,95,115,0.08);
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  .settingsSection {
+    padding: 14px;
+  }
+  .sectionTitle {
+    font-size: 16px;
+  }
+  #profilePreview {
+    width: 80px;
+    height: 80px;
+  }
+}
+/* Notifications section */
+#notificationsSection {
+  background: rgba(248,95,115,0.04);
+  border: 1px solid rgba(248,95,115,0.12);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.12s ease;
+}
+
+#notificationsSection:hover {
+  box-shadow: 0 8px 20px rgba(248,95,115,0.08);
+}
+
+/* Section title */
+#notificationsSection .sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 12px 0;
+}
+
+#notificationsSection .sectionTitle i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Collapse button */
+#notificationsSection .collapseBtn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+#notificationsSection .collapseBtn:hover {
+  transform: rotate(180deg);
+}
+
+/* Section content */
+#notificationsSection .sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual setting items */
+#notificationsSection .settingItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Labels */
+#notificationsSection .settingItem label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+/* Checkbox inputs */
+#notificationsSection input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+/* Time inputs */
+#notificationsSection input[type="time"] {
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0,0,0,0.1);
+  font-size: 14px;
+  cursor: pointer;
+  transition: box-shadow 0.12s ease, transform 0.08s ease;
+}
+
+#notificationsSection input[type="time"]:focus {
+  outline: none;
+  box-shadow: 0 6px 20px rgba(248,95,115,0.08);
+  transform: translateY(-1px);
+}
+
+/* Range slider */
+#notificationsSection input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  #notificationsSection {
+    padding: 14px;
+  }
+  #notificationsSection .sectionTitle {
+    font-size: 16px;
+  }
+}
+/* App Preferences Section */
+#preferencesSection {
+  background: rgba(248,95,115,0.04);
+  border: 1px solid rgba(248,95,115,0.12);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.12s ease;
+}
+
+#preferencesSection:hover {
+  box-shadow: 0 8px 20px rgba(248,95,115,0.08);
+}
+
+/* Section title */
+#preferencesSection .sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 12px 0;
+}
+
+#preferencesSection .sectionTitle i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Collapse button */
+#preferencesSection .collapseBtn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+#preferencesSection .collapseBtn:hover {
+  transform: rotate(180deg);
+}
+
+/* Section content */
+#preferencesSection .sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual setting items */
+#preferencesSection .settingItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Labels */
+#preferencesSection .settingItem label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+  min-width: 140px;
+}
+
+/* Select dropdowns */
+#preferencesSection .settingItem select {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0,0,0,0.1);
+  font-size: 14px;
+  background: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.12s ease, transform 0.08s ease;
+}
+
+#preferencesSection .settingItem select:focus {
+  outline: none;
+  box-shadow: 0 6px 20px rgba(248,95,115,0.08);
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  #preferencesSection {
+    padding: 14px;
+  }
+  #preferencesSection .sectionTitle {
+    font-size: 16px;
+  }
+  #preferencesSection .settingItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #preferencesSection .settingItem label {
+    min-width: auto;
+    margin-bottom: 4px;
+  }
+}
+/* Security & Privacy Section */
+#securitySection {
+  background: rgba(248,95,115,0.04);
+  border: 1px solid rgba(248,95,115,0.12);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.12s ease;
+}
+
+#securitySection:hover {
+  box-shadow: 0 8px 20px rgba(248,95,115,0.08);
+}
+
+/* Section title */
+#securitySection .sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 12px 0;
+}
+
+#securitySection .sectionTitle i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Collapse button */
+#securitySection .collapseBtn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+#securitySection .collapseBtn:hover {
+  transform: rotate(180deg);
+}
+
+/* Section content */
+#securitySection .sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual setting items */
+#securitySection .settingItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Labels */
+#securitySection .settingItem label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+/* Checkboxes */
+#securitySection .settingItem input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  #securitySection {
+    padding: 14px;
+  }
+  #securitySection .sectionTitle {
+    font-size: 16px;
+  }
+  #securitySection .settingItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

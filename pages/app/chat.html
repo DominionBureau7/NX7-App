@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NX7 Chat</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+
+        <!-- ================= Left Sidebar ================= -->
+        <div class="sidebar">
+
+            <!-- Logo -->
+            <div class="logo">
+                <img src="../../images/NX7-story.png" alt="NX7 Logo">
+            </div>
+
+            <!-- Navigation Icons -->
+            <div class="navIcons">
+                <a href="chat.html"><i class="fa-solid fa-comments"></i></a>
+                <a href="calls.html"><i class="fa-solid fa-phone"></i></a>
+                <a href="status.html"><i class="fa-regular fa-circle-dot"></i></a>
+                <a href="communities.html"><i class="fa-solid fa-users"></i></a>
+                <a href="archive.html"><i class="fa-solid fa-box-archive"></i></a>
+            </div>
+
+            <!-- Bottom Icons -->
+            <div class="bottomIcons">
+                <a href="support.html"><i class="fa-brands fa-supportnow"></i></a>
+                <a href="settings.html"><i class="fa-solid fa-gear"></i></a>
+            </div>
+
+        </div> <!-- end sidebar -->
+
+        <!-- ================= Main Content ================= -->
+        <div class="mainContent">
+
+            <!-- ================= Chat Page ================= -->
+            <div id="chat" class="page">
+
+                <!-- Chat List -->
+                <div class="chatlist">
+
+                    <!-- Header -->
+                    <div class="chatHeader">
+                        <div class="chatHeaderLeft">
+                            <img id="myProfilePic" src="default.png" alt="My Profile" class="chatHeaderAvatar">
+                            <h2>Chats</h2>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="searchBar">
+                        <input type="text" id="chatSearch" placeholder="Search or start a new chat">
+                    </div>
+
+                    <!-- Users List -->
+                    <div class="chatUsers">
+                        <!-- Repeat this block for each chat user -->
+                        <div class="chatUser">
+                            <img class="avatar" src="../../images/philosophy.jpg" alt="Philosopher">
+                            <div class="userInfo">
+                                <div class="name">Philosopher</div>
+                                <div class="lastMsg">Do you like to hear some great Quotes?</div>
+                            </div>
+                            <div class="sideTime"></div>
+                        </div>
+                        <div class="chatUser">
+                            <img class="avatar" src="../../images/joker.jpg" alt="Joker">
+                            <div class="userInfo">
+                                <div class="name">Joker</div>
+                                <div class="lastMsg">Wanna hear some jokes???</div>
+                            </div>
+                            <div class="sideTime"></div>
+                        </div>
+                        <div class="chatUser">
+                            <img class="avatar" src="../../images/dog.jpg" alt="Dog Lover">
+                            <div class="userInfo">
+                                <div class="name">Dog Lover</div>
+                                <div class="lastMsg">There's a reason dogs are man's best friend.</div>
+                            </div>
+                            <div class="sideTime"></div>
+                        </div>
+                        <div class="chatUser">
+                            <img class="avatar" src="../../images/advisor.jpg" alt="Advisor">
+                            <div class="userInfo">
+                                <div class="name">Advisor</div>
+                                <div class="lastMsg">I can give you some advice.</div>
+                            </div>
+                            <div class="sideTime"></div>
+                        </div>
+                        <div class="chatUser">
+                            <img class="avatar" src="../../images/cat.jpg" alt="Cat">
+                            <div class="userInfo">
+                                <div class="name">Cat</div>
+                                <div class="lastMsg">Cats are cute too, you know.</div>
+                            </div>
+                            <div class="sideTime"></div>
+                        </div>
+                        <div class="chatUser">
+                            <img class="avatar" src="../../images/crypto.jpg" alt="Crypto">
+                            <div class="userInfo">
+                                <div class="name">Crypto</div>
+                                <div class="lastMsg">Do stay updated on bitcoin prices!</div>
+                            </div>
+                            <div class="sideTime"></div>
+                        </div>
+                    </div> <!-- end chatUsers -->
+
+                </div> <!-- end chatlist -->
+
+                <!-- Chat Window -->
+                <div class="chatWindow">
+
+                    <!-- Welcome / Empty State -->
+                    <div class="welcome" id="welcome">
+                        <img src="../../images/NX7-horizontal.png" alt="NX7">
+                        <h2>Welcome to NX7</h2>
+                        <p>Select a chat to start messaging</p>
+                    </div>
+
+                    <!-- Active Chat Area -->
+                    <div class="chatArea" id="chatArea">
+
+                        <!-- Chat Header -->
+                        <div class="chatTop">
+                            <div class="chatUserInfo">
+                                <div class="avatar" id="chatAvatar">A</div>
+                                <div class="chatName" id="chatName">User</div>
+                            </div>
+                            <div class="chatActions">
+                                <i class="fa-solid fa-phone" id="callBtn"></i>
+                                <i class="fa-solid fa-video" id="videoBtn"></i>
+                                <button id="clearChat">Clear</button>
+                                <i class="fa-solid fa-ellipsis-vertical" id="menuBtn"></i>
+
+                                <!-- Chat Menu -->
+                                <div class="menu hidden" id="chatMenu">
+                                    <div class="menuItem" id="viewProfile">View Profile</div>
+                                    <div class="menuItem" id="muteChat">Mute Chat</div>
+                                    <div class="menuItem" id="deleteChat">Delete Chat</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Messages -->
+                        <div class="messages" id="messages">
+                            <div class="message received">Do you like to hear some great Quotes?</div>
+                            <div class="message sent">Ummm...</div>
+                        </div>
+
+                        <!-- Chat Input -->
+                        <div class="chatInputContainer">
+                            <div id="emojiPanel" class="emojiPanel hidden"></div>
+
+                            <div class="chatInput">
+                                <button id="emojiBtn">😊</button>
+                                <button id="mediaBtn">
+                                    <i class="fa-solid fa-camera"></i>
+                                </button>
+                                <input type="text" id="messageInput" placeholder="Type a message...">
+                                <button id="sendBtn">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div> <!-- end chatArea -->
+
+                </div> <!-- end chatWindow -->
+
+            </div> <!-- end Chat Page -->
+
+            <!-- ================= Other Pages (Hidden by default) ================= -->
+            <div id="calls" class="page hidden"><h2>Calls</h2></div>
+            <div id="status" class="page hidden"><h2>Status</h2></div>
+            <div id="groups" class="page hidden"><h2>Groups</h2></div>
+            <div id="archive" class="page hidden"><h2>Archive</h2></div>
+            <div id="support" class="page hidden"><h2>Support</h2></div>
+            <div id="settings" class="page hidden"><h2>Settings</h2></div>
+
+        </div> <!-- end mainContent -->
+
+    </div> <!-- end app -->
+
+    <!-- ================= Profile Modal ================= -->
+    <div id="profileModal" class="profileModal hidden">
+        <div class="profileCard">
+            <img id="profileAvatar" src="" class="profileAvatar" alt="Profile Avatar">
+            <h3 id="profileName"></h3>
+            <button id="closeProfile">Close</button>
+        </div>
+    </div>
+
+    <!-- ================= Call Modal ================= -->
+    <div id="callModal" class="callModal hidden">
+        <div class="callCard">
+            <img id="callAvatar" class="callAvatar" alt="Call Avatar">
+            <video id="localVideo" autoplay playsinline class="localVideo hidden"></video>
+            <h2 id="callName"></h2>
+            <p id="callType">Calling...</p>
+            <div class="callControls">
+                <button class="callBtn mute"><i class="fa-solid fa-microphone-slash"></i></button>
+                <button class="callBtn speaker"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="callBtn video"><i class="fa-solid fa-video"></i></button>
+                <button class="callBtn end" id="endCall"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= Media Handling ================= -->
+    <input type="file" id="mediaInput" accept="image/*,video/*" capture="environment" hidden>
+    <div id="mediaPreview" class="mediaPreview hidden">
+        <div class="previewCard">
+            <img id="previewImage" class="hidden" alt="Preview">
+            <video id="previewVideo" controls class="hidden"></video>
+            <div class="previewActions">
+                <button id="cancelMedia">Cancel</button>
+                <button id="sendMedia">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="../../js/chat.js"></script>
+</body>
+</html>

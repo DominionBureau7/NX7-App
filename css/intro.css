@@ -1,0 +1,317 @@
+/* Reset */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+/* Page background */
+
+body{
+    height:100vh;
+    background:rgb(255, 128, 145);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* Main container */
+
+.introContainer{
+    text-align:center;
+    position:relative;
+    background:white;
+    padding:70px 90px;
+    border-radius:18px;
+    box-shadow:
+    0 20px 60px rgba(0,0,0,0.12),
+    0 0 60px rgba(255,255,255,0.95);
+    border:1px solid rgba(255,255,255,0.6);
+
+    width:900px;
+    max-width:90%;
+
+    opacity:0;
+    transform:translateY(25px);
+    animation:containerIntro 0.8s ease forwards;
+}
+
+/* Logo area */
+
+.logoArea{
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow: hidden;
+border-radius: 12px;
+}
+.logoArea::after{
+
+    content:"";
+    position:absolute;
+
+    width:60%;
+    height:100%;
+
+    top:0;
+    left:-120%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent
+    );
+
+    animation:logoSweep 4s ease forwards;
+    z-index:2;
+}
+.logoArea::before{
+
+content:"";
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.15) 15%,
+    rgba(255,255,255,0.05) 35%,
+    transparent 60%
+);
+
+pointer-events:none;
+z-index:1;
+}
+/* Ripple glow */
+
+.ripple{
+position:absolute;
+width:520px;
+height:220px;
+border-radius:50%;
+background:radial-gradient(circle, rgba(255,90,90,0.15), transparent 70%);
+animation:ripplePulse 2s infinite;
+border-radius:100px;
+}
+
+/* Logo */
+
+.introLogo{
+    width: 620px;
+    max-width:90%;
+    position:relative;
+    filter:drop-shadow(0 0 20px rgba(255,90,90,0.5));
+    opacity:0;
+    animation:
+        logoFade 1s forwards,
+        logoFloat 4s ease-in-out infinite;
+}
+
+/* Welcome text */
+
+.welcomeText{
+font-size:30px;
+font-weight:600;
+color:#222;
+margin-top:35px;
+}
+
+/* Tagline */
+
+.tagline{
+font-size:16px;
+color:#666;
+letter-spacing:1px;
+margin-top:6px;
+}
+.loadingMessage{
+    margin-top:18px;
+    font-size:15px;
+    color:black;
+    min-height:22px;
+    transition: opacity 0.3s ease;
+}
+/* Progress bar container */
+
+.progressBarContainer{
+width: 360px;
+height: 10px;
+background:#eee;
+border-radius:10px;
+margin:30px auto 0;
+overflow:hidden;
+}
+.loadingPercent{
+    margin-top:12px;
+    font-size:14px;
+    color:#555;
+    font-weight:500;
+}
+/* Actual progress bar */
+
+.progressBar{
+    height:100%;
+    width:0%;
+    background:rgba(255,90,90,1);
+    border-radius:10px;
+
+    box-shadow:0 0 10px rgba(255,90,90,0.9);
+
+    animation:
+        loadProgress 8s linear forwards,
+        progressGlow 1.6s ease-in-out infinite;
+}
+/* Footer */
+
+.introFooter{
+    margin-top:45px;
+    font-size:13px;
+    font-weight: bold;
+    color:black;
+    position:relative;
+}
+.introFooter::before{
+
+    content:"";
+    position:absolute;
+
+    top:-20px;
+    left:-40px;
+    right:-40px;
+
+    height:1px;
+    background:#ddd;
+
+}
+
+/* Animations */
+
+@keyframes ripplePulse{
+
+
+0%{
+    transform:scale(1);
+    opacity:0.6;
+}
+
+100%{
+    transform:scale(1.4);
+    opacity:0;
+}
+
+
+}
+
+@keyframes logoFade{
+
+0%{
+    opacity:0;
+    transform:scale(0.9);
+}
+
+100%{
+    opacity:1;
+    transform:scale(1);
+}
+
+
+}
+
+@keyframes loadProgress{
+
+
+0%{
+    width:0%;
+}
+
+100%{
+    width:100%;
+}
+
+
+}
+
+@keyframes logoFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+@keyframes progressGlow{
+
+    0%{
+        box-shadow:0 0 6px rgba(255,90,90,0.5);
+    }
+
+    50%{
+        box-shadow:0 0 16px rgba(255,90,90,1);
+    }
+
+    100%{
+        box-shadow:0 0 6px rgba(255,90,90,0.5);
+    }
+
+}
+@keyframes logoSweep{
+
+    0%{
+        left:-120%;
+    }
+
+    100%{
+        left:120%;
+    }
+
+}
+
+/* Mobile responsiveness */
+
+@media (max-width:600px){
+
+
+.introLogo{
+    width:200px;
+}
+
+.welcomeText{
+    font-size:24px;
+}
+
+.progressBarContainer{
+    width:200px;
+}
+
+
+}
+@keyframes containerIntro{
+
+    0%{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    100%{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}

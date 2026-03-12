@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Archive</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <style>
+    :root{
+      --accent: rgba(248,95,115,1);
+      --bg: #fff;
+      --panel-bg: linear-gradient(180deg, rgba(248,95,115,0.04), rgba(248,95,115,0.02));
+      --radius: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --max-width: 1100px;
+      --gap: 12px;
+      --muted: rgba(0,0,0,0.55);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:#111; padding:18px; display:flex; justify-content:center;}
+    .wrap{width:100%; max-width:var(--max-width);}
+
+    /* Header */
+    .archiveHeader{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px;
+    }
+    .archiveHeader h1{font-size:20px; color:var(--accent); font-weight:800;}
+    .controls{display:flex; gap:10px; align-items:center;}
+
+    /* Search and filter */
+    .searchInput{
+      padding:10px 12px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); width:320px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .select{
+      padding:10px 12px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); background:#fff;
+    }
+
+    /* Grid */
+    .archiveGrid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap:16px;
+      margin-top:12px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      border-radius: var(--radius);
+      border: 1px solid rgba(248,95,115,0.04);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.12); }
+    .thumb{ width:100%; height:150px; object-fit:cover; background:#000; display:block; }
+    .cardBody{ padding:12px; display:flex; gap:10px; align-items:flex-start; }
+    .meta{ flex:1; }
+    .title{ font-weight:700; color:var(--accent); font-size:15px; margin-bottom:6px; }
+    .sub{ font-size:13px; color:var(--muted); }
+
+    .cardActions{ display:flex; gap:8px; margin-top:10px; }
+    .btn{
+      padding:8px 10px; border-radius:10px; border:0; cursor:pointer; font-weight:600;
+      background: linear-gradient(90deg, rgba(248,95,115,1), #ff8aa0); color:#02121a;
+    }
+    .linkBtn{
+      padding:8px 10px; border-radius:10px; border:1px solid rgba(248,95,115,0.12); background:transparent; color:var(--accent); cursor:pointer;
+    }
+
+    /* Pagination */
+    .pagination{ display:flex; gap:8px; justify-content:center; margin-top:18px; align-items:center; }
+    .pageBtn{ padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:#fff; cursor:pointer; }
+
+    /* Empty state */
+    .empty{ padding:28px; text-align:center; color:var(--muted); border-radius:var(--radius); border:1px dashed rgba(0,0,0,0.06); }
+
+    /* Modal (preview) */
+    #previewModal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:20px; background: rgba(0,0,0,0.5); z-index:2000; visibility:hidden; opacity:0; transition:opacity .18s ease, visibility .18s ease; }
+    #previewModal.show{ visibility:visible; opacity:1; }
+    .previewPanel{
+      width:100%; max-width:900px; border-radius:14px; padding:16px; background: linear-gradient(180deg, rgba(248,95,115,0.06), rgba(255,255,255,0.02)); border:2px solid rgba(248,95,115,0.95); box-shadow:0 30px 80px rgba(0,0,0,0.4);
+    }
+    .previewTop{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .previewTitle{ font-weight:800; color:var(--accent); }
+    .closePreview{ background:transparent; border:0; font-size:20px; cursor:pointer; color:var(--accent); padding:6px; border-radius:8px; }
+    .previewPlayer{ margin-top:12px; background:#000; border-radius:10px; overflow:hidden; }
+    .previewPlayer video{ width:100%; height:auto; display:block; background:#000; }
+
+    /* Responsive */
+    @media (max-width:720px){
+      .searchInput{ width:160px; }
+      .thumb{ height:120px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <div class="archiveHeader" aria-hidden="false">
+      <h1>Archive</h1>
+      <div class="controls" role="region" aria-label="Archive controls">
+        <input id="search" class="searchInput" type="search" placeholder="Search title or community" aria-label="Search archive">
+        <select id="filterCommunity" class="select" aria-label="Filter by community">
+          <option value="">All communities</option>
+        </select>
+        <select id="sortBy" class="select" aria-label="Sort archive">
+          <option value="new">Newest</option>
+          <option value="old">Oldest</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="grid" class="archiveGrid" aria-live="polite"></div>
+
+    <div id="pagination" class="pagination" aria-label="Pagination"></div>
+
+    <div id="empty" class="empty" style="display:none;">No archived items found.</div>
+  </div>
+
+  <!-- Preview modal -->
+  <div id="previewModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="previewPanel" role="document">
+      <div class="previewTop">
+        <div>
+          <div id="previewTitle" class="previewTitle"></div>
+          <div id="previewMeta" class="sub" style="margin-top:6px;"></div>
+        </div>
+        <button id="closePreview" class="closePreview" aria-label="Close preview">✕</button>
+      </div>
+      <div class="previewPlayer" style="margin-top:12px;">
+        <video id="previewVideo" controls preload="metadata"></video>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // archive.js - defensive, beginner-friendly
+    (function(){
+      'use strict';
+
+      // Demo archive data - replace with your real data
+      const archiveData = [
+        { id: 'a1', title: 'AI: 2025 recap', community: 'Tech Geeks', thumbnail: 'https://via.placeholder.com/640x360?text=AI', videoSrc: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', date: '2025-12-01' },
+        { id: 'a2', title: 'Top movie trailers', community: 'Movie Fans', thumbnail: 'https://via.placeholder.com/640x360?text=Trailer', videoSrc: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', date: '2025-11-20' },
+        { id: 'a3', title: 'Puppy training basics', community: 'Dog Lovers', thumbnail: 'https://via.placeholder.com/640x360?text=Puppy', videoSrc: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', date: '2025-10-05' },
+        // add more items as needed
+      ];
+
+      // Config
+      const PAGE_SIZE = 6;
+
+      // Elements
+      const grid = document.getElementById('grid');
+      const searchInput = document.getElementById('search');
+      const filterCommunity = document.getElementById('filterCommunity');
+      const sortBy = document.getElementById('sortBy');
+      const pagination = document.getElementById('pagination');
+      const emptyEl = document.getElementById('empty');
+
+      const previewModal = document.getElementById('previewModal');
+      const previewTitle = document.getElementById('previewTitle');
+      const previewMeta = document.getElementById('previewMeta');
+      const previewVideo = document.getElementById('previewVideo');
+      const closePreview = document.getElementById('closePreview');
+
+      // Defensive helpers
+      function safeText(text){ return (text === undefined || text === null) ? '' : String(text); }
+      function formatDate(d){ try { return new Date(d).toLocaleDateString(); } catch(e){ return safeText(d); } }
+
+      // Populate community filter options
+      function populateCommunityFilter(){
+        const communities = Array.from(new Set(archiveData.map(i => i.community).filter(Boolean)));
+        communities.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c;
+          opt.textContent = c;
+          filterCommunity.appendChild(opt);
+        });
+      }
+
+      // Render a single card
+      function renderCard(item){
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.setAttribute('data-id', item.id);
+        card.tabIndex = 0;
+
+        const img = document.createElement('img');
+        img.className = 'thumb';
+        img.src = item.thumbnail || '';
+        img.alt = safeText(item.title);
+
+        const body = document.createElement('div');
+        body.className = 'cardBody';
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = safeText(item.title);
+
+        const sub = document.createElement('div');
+        sub.className = 'sub';
+        sub.textContent = `${safeText(item.community)} • ${formatDate(item.date)}`;
+
+        const actions = document.createElement('div');
+        actions.className = 'cardActions';
+
+        const previewBtn = document.createElement('button');
+        previewBtn.className = 'btn';
+        previewBtn.textContent = 'Preview';
+        previewBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openPreview(item);
+        });
+
+        const downloadBtn = document.createElement('a');
+        downloadBtn.className = 'linkBtn';
+        downloadBtn.textContent = 'Download';
+        downloadBtn.href = item.videoSrc || '#';
+        downloadBtn.setAttribute('download', '');
+        downloadBtn.target = '_blank';
+        downloadBtn.rel = 'noopener noreferrer';
+
+        actions.appendChild(previewBtn);
+        actions.appendChild(downloadBtn);
+
+        meta.appendChild(title);
+        meta.appendChild(sub);
+        meta.appendChild(actions);
+
+        body.appendChild(meta);
+        card.appendChild(img);
+        card.appendChild(body);
+
+        // keyboard open
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPreview(item); }
+        });
+
+        return card;
+      }
+
+      // Render grid with pagination
+      function renderGrid(items, page = 1){
+        grid.innerHTML = '';
+        if (!items || items.length === 0) {
+          emptyEl.style.display = 'block';
+          pagination.innerHTML = '';
+          return;
+        }
+        emptyEl.style.display = 'none';
+
+        const total = items.length;
+        const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+        const current = Math.min(Math.max(1, page), pages);
+        const start = (current - 1) * PAGE_SIZE;
+        const pageItems = items.slice(start, start + PAGE_SIZE);
+
+        pageItems.forEach(i => grid.appendChild(renderCard(i)));
+
+        // pagination
+        pagination.innerHTML = '';
+        const prev = document.createElement('button');
+        prev.className = 'pageBtn';
+        prev.textContent = 'Prev';
+        prev.disabled = current === 1;
+        prev.addEventListener('click', () => renderGrid(items, current - 1));
+        pagination.appendChild(prev);
+
+        const info = document.createElement('div');
+        info.textContent = `${current} / ${pages}`;
+        info.style.padding = '8px 10px';
+        pagination.appendChild(info);
+
+        const next = document.createElement('button');
+        next.className = 'pageBtn';
+        next.textContent = 'Next';
+        next.disabled = current === pages;
+        next.addEventListener('click', () => renderGrid(items, current + 1));
+        pagination.appendChild(next);
+      }
+
+      // Filter + search + sort
+      function getFilteredItems(){
+        const q = (searchInput.value || '').trim().toLowerCase();
+        const community = filterCommunity.value;
+        const sort = sortBy.value;
+
+        let items = archiveData.slice();
+
+        if (community) items = items.filter(i => (i.community || '').toLowerCase() === community.toLowerCase());
+        if (q) items = items.filter(i => ((i.title || '') + ' ' + (i.community || '')).toLowerCase().includes(q));
+
+        items.sort((a,b) => {
+          const da = new Date(a.date || 0).getTime();
+          const db = new Date(b.date || 0).getTime();
+          return sort === 'old' ? da - db : db - da;
+        });
+
+        return items;
+      }
+
+      // Preview modal open
+      function openPreview(item){
+        if (!item) return;
+        previewTitle.textContent = safeText(item.title);
+        previewMeta.textContent = `${safeText(item.community)} • ${formatDate(item.date)}`;
+
+        // Reset video
+        try {
+          previewVideo.pause();
+          previewVideo.removeAttribute('src');
+          previewVideo.load();
+        } catch(e){ /* ignore */ }
+
+        if (item.videoSrc) {
+          previewVideo.src = item.videoSrc;
+          previewVideo.controls = true;
+        } else {
+          previewVideo.removeAttribute('src');
+          previewVideo.controls = false;
+        }
+
+        previewModal.classList.add('show');
+        previewModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        // focus
+        setTimeout(() => closePreview.focus(), 50);
+      }
+
+      // Close preview
+      function closePreviewModal(){
+        previewModal.classList.remove('show');
+        previewModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        try {
+          previewVideo.pause();
+          previewVideo.removeAttribute('src');
+          previewVideo.load();
+        } catch(e){ /* ignore */ }
+      }
+
+      // Click outside to close
+      previewModal.addEventListener('click', (e) => {
+        if (e.target === previewModal) closePreviewModal();
+      });
+      closePreview.addEventListener('click', closePreviewModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && previewModal.classList.contains('show')) closePreviewModal();
+      });
+
+      // Wire inputs
+      searchInput.addEventListener('input', () => renderGrid(getFilteredItems(), 1));
+      filterCommunity.addEventListener('change', () => renderGrid(getFilteredItems(), 1));
+      sortBy.addEventListener('change', () => renderGrid(getFilteredItems(), 1));
+
+      // Init
+      populateCommunityFilter();
+      renderGrid(getFilteredItems(), 1);
+
+      // Expose for debugging (optional)
+      window.__archive = { data: archiveData, refresh: () => renderGrid(getFilteredItems(), 1) };
+    })();
+  </script>
+</body>
+</html>

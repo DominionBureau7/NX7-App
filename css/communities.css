@@ -1,0 +1,514 @@
+/* =========================
+   Part 1 — Polished CSS
+   ========================= */
+
+/* Theme tokens */
+:root{
+  --accent: rgba(248,95,115,1);
+  --accent-weak: rgba(248,95,115,0.15);
+  --panel-border: 2px solid rgba(248,95,115,1);
+  --panel-bg: linear-gradient(180deg, rgba(248,95,115,0.04), rgba(248,95,115,0.02));
+  --radius: 14px;
+  --gap: 12px;
+  --shadow-soft: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-strong: 0 18px 40px rgba(0,0,0,0.28);
+  --ui-font: 'Times New Roman', Times, serif;
+}
+
+/* Global reset (kept minimal) */
+* { box-sizing: border-box; margin:0; padding:0; }
+html,body { height:100%; }
+
+/* Body */
+body{
+  font-family: var(--ui-font);
+  background: #fff;
+  color: #111;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ======= App layout ======= */
+/* Horizontal rail + main column */
+.app {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* Sidebar rail sizing and placement */
+.sidebar {
+  flex: 0 0 100px;
+  width: 100px;
+  min-width: 72px;
+  max-width: 120px;
+  margin: 12px;
+  padding: 18px 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  background: var(--panel-bg);
+  border: var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* Main content column */
+.mainContent {
+  flex: 1 1 auto;
+  min-width: 0; /* prevents overflow in flex children */
+  display: block;
+  margin-right: 12px;
+}
+
+/* ======= Sidebar internals ======= */
+.logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  padding-bottom:6px;
+}
+.logo img{
+  width:70px;
+  height:70px;
+  object-fit:contain;
+  border-radius:10px;
+  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 6px 18px rgba(248,95,115,0.12);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.logo img:hover{ transform: scale(1.06); box-shadow: 0 10px 30px rgba(248,95,115,0.18); }
+
+/* Icon columns */
+.navIcons, .bottomIcons{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  align-items:center;
+  width:100%;
+}
+.navIcons a, .bottomIcons a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:56px;
+  height:56px;
+  border-radius:12px;
+  text-decoration:none;
+  transition: transform .14s ease, background .14s ease, box-shadow .14s ease;
+}
+.icon{
+  font-size:26px;
+  line-height:1;
+  color: var(--accent);
+  transition: transform .14s ease, color .14s ease;
+}
+.navIcons a:hover, .bottomIcons a:hover{
+  transform: translateY(-4px);
+  background: rgba(248,95,115,0.08);
+  box-shadow: 0 8px 20px rgba(248,95,115,0.06);
+}
+.navIcons a.active, .bottomIcons a.active{
+  background: rgba(248,95,115,0.15);
+  transform: scale(1.05);
+}
+.navIcons a.active .icon, .bottomIcons a.active .icon{
+  transform: scale(1.08);
+}
+
+/* Optional small labels under icons */
+.sidebar .iconLabel{
+  margin-top:6px;
+  font-size:11px;
+  color: rgba(0,0,0,0.55);
+  text-align:center;
+}
+
+/* ======= Top bar (communitiesBar) ======= */
+.communitiesBar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 18px;
+  background: var(--panel-bg);
+  border: var(--panel-border);
+  border-radius:14px;
+  box-shadow: var(--shadow-soft);
+  margin: 12px 12px 0 0;
+}
+.communitiesBar h2{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+  color: var(--accent);
+  letter-spacing:0.2px;
+}
+
+/* Buttons group */
+.buttons{ display:flex; align-items:center; gap:10px; }
+.newCommunityBtn{
+  appearance:none; border:0; padding:8px 14px; border-radius:10px;
+  cursor:pointer; font-weight:700; color:#02121a;
+  background: linear-gradient(90deg, var(--accent), #ff8aa0);
+  box-shadow: 0 8px 24px rgba(248,95,115,0.12);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.goBackBtn{
+  appearance:none; border:1px solid rgba(248,95,115,0.12);
+  padding:8px 12px; border-radius:10px; cursor:pointer;
+  background: transparent; color: var(--accent); font-weight:600;
+  transition: transform .12s ease, background .12s ease;
+}
+.newCommunityBtn:hover, .goBackBtn:hover{ transform: translateY(-3px); }
+.newCommunityBtn:active, .goBackBtn:active{ transform: translateY(0); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+
+/* ======= Content container & list ======= */
+.container{
+  max-width: 1100px;
+  margin: 12px;
+  padding: 18px;
+  width: calc(100% - 144px); /* leaves room for sidebar + margins */
+}
+.communitiesList{
+  display:flex; flex-direction:column; gap:14px; padding:8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+  border-radius:12px; border: 1px solid rgba(248,95,115,0.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  max-height: calc(100vh - 220px); overflow-y:auto; -webkit-overflow-scrolling: touch;
+}
+.communitiesList .communityItem{
+  display:flex; align-items:center; gap:14px; padding:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px; border:1px solid rgba(248,95,115,0.03);
+}
+
+/* Empty state */
+.communitiesList:empty::before{
+  content: "No communities yet. Click New to create one.";
+  display:block; color: rgba(0,0,0,0.45); padding:28px; text-align:center; font-size:15px;
+}
+
+/* Scrollbar styling */
+.communitiesList::-webkit-scrollbar{ width:10px; }
+.communitiesList::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, rgba(248,95,115,0.18), rgba(248,95,115,0.12));
+  border-radius:10px; border:2px solid transparent; background-clip: padding-box;
+}
+
+/* ======= Community modal basics (kept here for Part1) ======= */
+#communityModal { display:flex; align-items:center; justify-content:center; padding:20px; background: rgba(0,0,0,0.45); z-index:1300; }
+.communityContent{
+  width:100%; max-width:720px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px; padding:18px; border:2px solid rgba(248,95,115,0.9); box-shadow: var(--shadow-strong);
+  position:relative; color:#111; overflow:hidden; transform: translateY(-6px); transition: transform .18s ease, opacity .18s ease;
+}
+#communityModal:not(.hidden) .communityContent{ transform: translateY(0); opacity:1; }
+.communityHeader{ display:flex; gap:14px; align-items:center; margin-bottom:14px; }
+.communityHeader img{ width:72px; height:72px; border-radius:12px; object-fit:cover; border:1px solid rgba(255,255,255,0.04); }
+.communityName{ font-weight:700; color: var(--accent); font-size:18px; }
+.communityChannels{ color: rgba(0,0,0,0.55); font-size:13px; margin-top:4px; }
+
+/* Minimal video modal placeholder (Part1) */
+#videoModal{ display:none; }
+.hidden{ display:none !important; }
+
+/* Accessibility focus */
+button:focus, .communityItem:focus, .channelItem:focus, .navIcons a:focus { outline: 3px solid rgba(248,95,115,0.14); outline-offset: 3px; border-radius:8px; }
+
+/* ======= Responsive adjustments ======= */
+@media (max-width: 920px){
+  .container{ margin:10px; padding:12px; width:auto; }
+  .communitiesList{ max-height: calc(100vh - 200px); gap:12px; }
+}
+@media (max-width: 520px){
+  .sidebar{ width:72px; padding:12px 8px; margin:8px; }
+  .logo img{ width:56px; height:56px; }
+  .navIcons a, .bottomIcons a{ width:48px; height:48px; border-radius:10px; }
+  .icon{ font-size:20px; }
+  .container{ margin:8px; padding:10px; width:auto; }
+  .communitiesList{ gap:10px; padding:6px; }
+  .communitiesList .communityItem{ padding:10px; gap:10px; }
+}
+
+/* =========================
+   Part 2 — Channels and Video Modal
+   Matches Part 1 tokens and conventions
+   ========================= */
+
+/* Reuse theme tokens from Part 1 */
+:root{
+  --accent: rgba(248,95,115,1);
+  --accent-weak: rgba(248,95,115,0.15);
+  --panel-border: 2px solid rgba(248,95,115,1);
+  --panel-bg: linear-gradient(180deg, rgba(248,95,115,0.04), rgba(248,95,115,0.02));
+  --radius: 14px;
+  --shadow-soft: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* Community header avatar */
+.communityHeader img#communityAvatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 8px 20px rgba(248,95,115,0.06);
+}
+
+/* Name and meta */
+.communityHeader .communityName {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.05;
+}
+
+.communityHeader .communityChannels {
+  font-size: 13px;
+  color: rgba(0,0,0,0.55);
+  margin-top: 4px;
+}
+
+/* Channels section */
+.channelsSection {
+  margin-top: 6px;
+}
+
+/* Channels list */
+.channelsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(60vh);
+  overflow-y: auto;
+  padding-right: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Channel row */
+.channelItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+
+/* Hover and focus */
+.channelItem:hover {
+  background: rgba(248,95,115,0.04);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.channelItem:focus {
+  outline: 2px solid rgba(248,95,115,0.18);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Channel thumbnail */
+.channelItem img {
+  width: 96px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Channel title and meta */
+.channelItem .channelTitle {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 15px;
+}
+.channelItem .channelMeta {
+  font-size: 13px;
+  color: rgba(0,0,0,0.55);
+  margin-top: 4px;
+}
+
+/* Channels scrollbar */
+.channelsList::-webkit-scrollbar { width: 10px; }
+.channelsList::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(248,95,115,0.18), rgba(248,95,115,0.12));
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Close button */
+.closeBtn {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  background: transparent;
+  border: 0;
+  color: var(--accent);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+.closeBtn:hover { background: rgba(248,95,115,0.06); }
+
+/* Empty channels state */
+.channelsList:empty::before {
+  content: "No channels yet. Add one with New.";
+  display: block;
+  padding: 18px;
+  color: rgba(0,0,0,0.45);
+  text-align: center;
+}
+
+/* Responsive for community modal */
+@media (max-width: 720px) {
+  .communityContent { padding: 14px; max-width: 92%; }
+  .communityHeader img#communityAvatar { width: 56px; height: 56px; }
+  .channelItem img { width: 72px; height: 48px; }
+  .channelItem { padding: 8px; gap: 10px; }
+}
+
+/* =========================
+   Video Modal and Player
+   ========================= */
+
+/* Modal overlay */
+#videoModal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.55);
+  z-index: 1400;
+}
+
+/* Panel */
+.videoContent {
+  width: 100%;
+  max-width: 880px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  padding: 18px;
+  border: 2px solid rgba(248,95,115,0.9);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.36);
+  position: relative;
+  color: var(--accent);
+  overflow: hidden;
+  transform: translateY(-8px);
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+/* Reveal animation */
+#videoModal:not(.hidden) .videoContent {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Player container */
+.videoPlayer {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.6);
+  display: block;
+}
+
+/* Thumbnail */
+.videoPlayer img#videoThumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  background: #000;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* Play button overlay */
+.playButton {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+  border: 1px solid rgba(248,95,115,0.06);
+  cursor: pointer;
+  transition: transform .12s ease, opacity .12s ease;
+  pointer-events: auto;
+}
+.playButton:hover { transform: translate(-50%,-50%) scale(1.06); }
+
+/* Video element */
+.videoPlayer video#videoElement {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  background: #000;
+}
+
+/* Hide elements via JS classes */
+.videoPlayer .hidden { display: none !important; }
+
+/* Video info */
+.videoInfo {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.videoInfo #videoTitle {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--accent);
+}
+.videoInfo #videoChannel {
+  font-size: 13px;
+  color: rgba(0,0,0,0.55);
+}
+
+/* Close button for video modal */
+.videoContent .closeBtn {
+  color: var(--accent);
+}
+.videoContent .closeBtn:hover { background: rgba(248,95,115,0.06); }
+
+/* Responsive tweaks */
+@media (max-width: 820px) {
+  .videoContent { padding: 14px; max-width: 94%; }
+  .playButton { width: 56px; height: 56px; font-size: 24px; }
+  .videoInfo #videoTitle { font-size: 16px; }
+}
+
+/* Focus and accessibility */
+.playButton:focus, .closeBtn:focus, video#videoElement:focus {
+  outline: 2px solid rgba(248,95,115,0.18);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Backdrop visibility transitions */
+#videoModal.hidden { visibility: hidden; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+#videoModal:not(.hidden) { visibility: visible; opacity: 1; pointer-events: auto; transition: opacity .18s ease; }

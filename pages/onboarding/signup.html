@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NX7 - Signup</title>
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../../css/signup.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+    <div class="signupApp">
+        <div class="signupBox">
+
+            <!-- Avatar Preview -->
+            <div class="userProfile">
+                <div id="avatar"></div>
+            </div>
+
+            <!-- Heading -->
+            <h2>Create your NX7 Account</h2>
+            <p>Sign up to start messaging and connecting!</p>
+
+            <!-- Signup Form -->
+            <form id="signupForm">
+                <input type="text" id="fullName" placeholder="Full Name">
+                <small class="error" id="nameError"></small>
+
+                <input type="number" id="phone" placeholder="Phone Number">
+                <small class="error" id="phoneError"></small>
+
+                <input type="text" id="email" placeholder="Email Address">
+                <small class="error" id="emailError"></small>
+
+                <!-- Password -->
+                <div class="passwordWrapper">
+                    <input type="password" id="password" placeholder="Create New Password">
+                    <button type="button" id="togglePassword">Show</button>
+                </div>
+                <div class="strength">
+                    <div id="strengthBar"></div>
+                    <p id="strengthText"></p>
+                </div>
+                <small class="error" id="passwordError"></small>
+
+                <!-- Confirm Password -->
+                <div class="passwordWrapper">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                    <button type="button" id="toggleConfirmPassword">Show</button>
+                </div>
+                <small class="error" id="confirmpasswordError"></small>
+
+                <!-- Terms & Conditions -->
+                <label class="termsBox">
+                    <input type="checkbox" id="terms">
+                    I agree to the <strong>Terms & Conditions</strong>
+                </label>
+
+                <!-- Submit Button -->
+                <button type="submit" id="signupBtn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS for Signup Page -->
+    <script src="../../js/signup.js"></script>
+</body>
+</html>

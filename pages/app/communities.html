@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Communities</title>
+
+  <!-- Your main app stylesheet (part 1 & 2 already provided) -->
+  <!-- <link rel="stylesheet" href="chat.css"> -->
+
+  <!-- Communities-specific stylesheet (drop-in from previous message) -->
+  <link rel="stylesheet" href="../../css/communities.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar (keeps your existing layout) -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../../images/NX7-logo.png" alt="Logo">
+      </div>
+
+      <nav class="navIcons">
+        <a class="active"><i class="fa-solid fa-house"></i></a>
+        <a><i class="fa-solid fa-message"></i></a>
+        <a><i class="fa-solid fa-bell"></i></a>
+      </nav>
+
+      <div class="bottomIcons">
+        <a><i class="fa-solid fa-gears"></i></a>
+      </div>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="mainContent">
+      <section class="page" id="communitiesPage">
+        <!-- Top bar -->
+        <div class="communitiesBar">
+          <h2>Communities</h2>
+          <div class="buttons">
+            <button id="newCommunityBtn" class="newCommunityBtn"><i class="fa-solid fa-plus"></i></button>
+            <button id="goBackBtn" class="goBackBtn">⬅ Go Back</button>
+          </div>
+        </div>
+
+        <!-- Content container -->
+        <div class="container">
+          <div id="communitiesList" class="communitiesList" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Community Modal -->
+  <div id="communityModal" class="hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="communityContent" role="document">
+      <button id="closeCommunity" class="closeBtn" aria-label="Close community modal">✕</button>
+
+      <div class="communityHeader" id="communityHeader">
+        <img id="communityAvatar" src="" alt="Community avatar">
+        <div>
+          <div id="communityName" class="communityName"></div>
+          <div id="communityChannels" class="communityChannels">0 channels</div>
+        </div>
+      </div>
+
+      <div class="channelsSection">
+        <h3 style="color: rgba(248,95,115,1); margin:0 0 8px 0;">Channels</h3>
+        <div id="channelsList" class="channelsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="videoContent" role="document">
+      <button id="closeVideo" class="closeBtn" aria-label="Close video modal">✕</button>
+
+      <div class="videoPlayer" style="margin-top:6px;">
+        <img id="videoThumbnail" src="" alt="Video thumbnail">
+        <button id="playButton" class="playButton" aria-label="Play video">▶</button>
+        <iframe id="ytPlayer" class="hidden" width="640" height="360"
+        title="YouTube video player" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+
+      <div class="videoInfo">
+        <div id="videoTitle" class="videoTitle"></div>
+        <div id="videoChannel" class="videoChannel"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/communities.js"></script>
+</body>
+</html>

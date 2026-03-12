@@ -1,0 +1,132 @@
+/* Reset */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+
+/* Page background */
+
+body{
+
+height:100vh;
+background:rgb(255,128,145);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+
+/* Main container */
+
+.launchContainer{
+
+text-align:center;
+
+background:white;
+
+padding:70px 90px;
+
+border-radius:18px;
+
+box-shadow:
+0 20px 60px rgba(0,0,0,0.12),
+0 0 60px rgba(255,255,255,0.95);
+
+border:1px solid rgba(255,255,255,0.6);
+
+width:700px;
+max-width:90%;
+
+}
+
+
+/* Logo */
+
+.launchLogo{
+
+width:420px;
+max-width:90%;
+
+margin-bottom:60px;
+
+}
+
+
+/* Button container */
+
+.launchAction{
+
+margin-bottom:30px;
+
+}
+
+
+/* Open NX7 Button */
+
+.openButton{
+
+padding:22px 80px;
+
+font-size:24px;
+font-weight:600;
+
+border:none;
+
+border-radius:12px;
+
+background:white;
+color:rgba(248, 95, 115, 1);
+
+cursor:pointer;
+
+transition:
+transform 0.2s ease,
+box-shadow 0.2s ease;
+
+box-shadow:0 10px 30px rgba(255,90,90,0.6);
+
+}
+
+
+/* Hover effect */
+
+.openButton:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 15px 40px rgba(255,90,90,0.9);
+
+}
+
+
+/* Click effect */
+
+.openButton:active{
+
+transform:scale(0.97);
+
+}
+
+
+/* Volume note */
+
+.volumeNote{
+
+font-size: 20px;
+font-weight: bold;
+color: black;
+
+margin-top:10px;
+
+}
+
+.openButton:disabled{
+opacity:0.7;
+cursor:default;
+}

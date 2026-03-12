@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NX7 Status</title>
+<link rel="stylesheet" href="../../css/status.css">
+</head>
+<body>
+
+<div class="statusBar">
+  <h2>Status</h2>
+  <div id="statusList" class="statusList"></div>
+</div>
+
+<!-- Fullscreen modal for viewing status -->
+<div id="statusModal" class="hidden">
+  <div class="statusContent">
+    
+    <!-- Progress bar -->
+    <div class="progressBar"></div>
+    
+    <!-- Navigation arrows -->
+    <button id="prevStatus" class="statusNav prev">‹</button>
+    <button id="nextStatus" class="statusNav next">›</button>
+    
+    <!-- Close button -->
+    <span id="closeStatus" class="closeBtn">&times;</span>
+    
+    <!-- Status image -->
+    <img id="statusImage" src="" alt="Status">
+
+    <!-- Status info -->
+    <div class="statusInfo">
+      <div id="statusName"></div>
+      <div id="statusTime"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../js/status.js"></script>
+</body>
+</html>

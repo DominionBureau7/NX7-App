@@ -1,0 +1,146 @@
+/* =========================================================
+   Global Reset and Font
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =========================================================
+   Signup Container
+   - Matches chat page theme
+========================================================= */
+.signupApp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.signupBox {
+    width: 400px;
+    background-color: rgba(248, 95, 115, 0.15);
+    padding: 40px;
+    border: 2px solid rgba(248, 95, 115, 1);
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 25px 5px rgba(248, 95, 115, 0.3);
+}
+
+/* Avatar circle */
+.userProfile {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+#avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(248, 95, 115, 1);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+/* Heading and description */
+h2 {
+    font-size: 1.8em;
+    color: rgba(248, 95, 115, 1);
+    margin-bottom: 8px;
+}
+p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Form inputs */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+input {
+    padding: 12px;
+    border: 2px solid rgba(248, 95, 115, 1);
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+    font-weight: bold;
+}
+input:focus {
+    border-color: rgba(248, 95, 115, 1);
+}
+.error {
+    color: red;
+    font-size: 13px;
+    height: 16px;
+}
+
+/* Password wrapper with toggle */
+.passwordWrapper {
+    display: flex;
+    gap: 8px;
+}
+.passwordWrapper input {
+    flex: 1;
+}
+.passwordWrapper button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(248, 95, 115, 1);
+    color: white;
+    cursor: pointer;
+}
+
+/* Password strength bar */
+.strength {
+    margin-top: 5px;
+}
+#strengthBar {
+    width: 0%;
+    height: 5px;
+    background-color: lightgray;
+    border-radius: 5px;
+}
+#strengthText {
+    font-size: 12px;
+    margin-top: 2px;
+    color: #555;
+}
+
+/* Terms and submit button */
+.termsBox {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 8px;
+    color: #333;
+}
+button[type="submit"] {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(248, 95, 115, 1);
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+button[type="submit"]:hover {
+    background-color: rgba(248, 95, 115, 0.85);
+}

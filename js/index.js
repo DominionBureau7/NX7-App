@@ -15,7 +15,7 @@ if(openButton){
 
         // Redirect to intro page after 0.6 seconds
         setTimeout(() => {
-            window.location.href = "intro.html";
+            window.location.href = "pages/onboarding/intro.html";
         }, 600);
     });
 }

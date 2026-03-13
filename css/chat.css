@@ -1,4 +1,4 @@
-/* =========================================================
+ /* =========================================================
    Global Reset
    - Removes default margins/paddings
    - Sets box-sizing to border-box for easier sizing
@@ -49,7 +49,7 @@ body {
 ========================================================= */
 .sidebar {
     width: 100px;
-    background-color: rgba(248, 95, 115, 0.15);
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,7 +113,7 @@ i:hover {
 ========================================================= */
 .chatlist {
     width: 800px;
-    background-color: rgba(248, 95, 115, 0.15);
+    background-color: white;
     color: rgba(248, 95, 115, 1);
     padding: 25px;
     border: 2px solid rgba(248, 95, 115, 1);
@@ -140,7 +140,9 @@ i:hover {
     padding: 10px;
     border: none;
     border-radius: 20px;
-    outline: none;
+    background-color: black;
+    color: rgba(248, 95, 115, 1);
+    /* outline: none; */
 }
 
 /* -------------------- Chat Users ------------------------- */
@@ -207,6 +209,7 @@ i:hover {
    - Flex container for welcome screen or messages
 ========================================================= */
 .chatWindow {
+    position: relative;
     flex: 1;
     background-color: white;
     color: rgba(248, 95, 115, 1);
@@ -219,9 +222,12 @@ i:hover {
 
 /* -------------------- Welcome Screen -------------------- */
 .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding: 40px 20px;
-    box-shadow: 0 0 25px 5px rgba(248, 95, 115, 0.3);
+    box-shadow: 0 0 25px 5px rgba(248, 95, 115, 1);
 }
 
 .welcome img {
@@ -540,7 +546,7 @@ opacity:0;
 #clearChat:hover {
     color: black;
 }
-/* -------------------- Emoji Panel ---------------- */
+ /* -------------------- Emoji Panel ---------------- */
 /* Emoji Panel */
 .emojiPanel {
     position: absolute;
@@ -877,3 +883,192 @@ opacity:0;
     font-size:11px;
     margin-left:4px;
 }
+/* ============================
+   NX7 Dark Mode
+   ============================ */
+
+.theme-dark{
+  background:#0f0f0f;
+  color:white;
+}
+
+.theme-dark .settingsSection{
+  background:#1a1a1a;
+}
+
+.theme-dark input,
+.theme-dark select{
+  background:#222;
+  color:white;
+  border-color:#444;
+}
+
+.theme-dark .btn{
+  background:#333;
+  color:white;
+}
+
+/* ===============================
+           NX7 MINI GAME
+           ============================== */
+
+        /* Launch Button Area */
+        .gameLaunchArea{
+
+    display:flex;
+    justify-content:center;
+    margin-top: 250px;
+
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:5;
+}
+
+.launchGameBtn {
+            
+    padding: 14px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: rgba(255,90,90,1);
+    color: white;
+    box-shadow: 0 0 15px rgba(255,90,90,0.35);
+    transition: transform .2s, box-shadow .2s;
+}
+        .launchGameBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(255,90,90,0.55);
+        }
+
+        /* Game Window */
+        .dogGameWindow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #121212;
+            display: flex;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        /* Hide elements */
+        .hidden {
+            display: none;
+        }
+
+        /* Game Header */
+        .dogGameHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .dogGameHeader h2 {
+            font-size: 18px;
+            margin: 0;
+            color: white;
+        }
+
+        /* Header Buttons */
+        .goBackFromGameBtn,
+        .closeDogGameBtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 6px 10px;
+        }
+        .goBackFromGameBtn:hover,
+        .closeDogGameBtn:hover {
+            color: rgba(255,90,90,1);
+        }
+
+        /* Start Screen */
+        .dogGameStart {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+        }
+        .dogGameStart button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background: rgba(255,90,90,1);
+            color: white;
+            box-shadow: 0 0 12px rgba(255,90,90,0.35);
+        }
+
+        /* Game Area */
+        .dogGameArea {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        .dogGameArea img{
+            border: 2px solid white;
+            border-radius: 20%;
+        }
+
+        /* Score */
+        .dogGameScore {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(6px);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: white;
+        }
+
+        /* Dog Target */
+        .dogTarget {
+            position: absolute;
+            width: 90px;
+            cursor: pointer;
+            transition: transform .15s;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .dogTarget:hover {
+            transform: scale(1.1);
+        }
+
+        /* Game Over Screen */
+        .dogGameOver {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+        }
+        .dogGameOver h3 {
+            font-size: 22px;
+            color: white;
+            margin: 0;
+        }
+        .dogGameOver button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255,90,90,1);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(255,90,90,0.35);
+        }

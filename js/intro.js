@@ -126,3 +126,4 @@ setTimeout(redirectUser, 8000);
 
 // Safety fallback after 8.5 seconds
 setTimeout(redirectUser, 8500);
+

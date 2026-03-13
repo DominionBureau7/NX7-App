@@ -55,6 +55,7 @@ let selectedFile = null;
 // ====== Load user profile from localStorage ======
 const savedProfilePic = localStorage.getItem('profilePic') || '../../images/default.png';
 const savedProfileName = localStorage.getItem('profileName') || 'Nadir Khan'; // default name
+const myProfilePicSidebar = document.getElementById("myProfilePicSidebar");
 
 // Update main header profile pic
 if(profilePic) profilePic.src = savedProfilePic;
@@ -242,6 +243,7 @@ async function botReply() {
 // Open chat user
 users.forEach(user => {
     user.addEventListener("click", () => {
+        document.getElementById("gameLaunchArea").style.display = "none";
         users.forEach(u => u.classList.remove("active"));
         user.classList.add("active");
 
@@ -249,7 +251,7 @@ users.forEach(user => {
         const avatar = user.querySelector(".avatar")?.src || "default.png";
 
         chatName.innerText = currentUser;
-        chatAvatar.src = avatar;
+        chatAvatar.innerHTML = `<img src="${avatar}" width="40" height="40" style="border-radius:50%">`;
         chatAvatar.alt = currentUser + "'s avatar";
 
         welcome.style.display = "none";
@@ -283,6 +285,9 @@ clearBtn.addEventListener("click", () => {
         activeUser.querySelector(".lastMsg").innerText = "";
         activeUser.querySelector(".sideTime").innerText = "";
     }
+    if(messages.children.length === 0){
+    document.getElementById("gameLaunchArea").style.display = "flex";
+}
 });
 
 // Toggle emoji panel
@@ -456,3 +461,170 @@ profilePicInput?.addEventListener('change', (e) => {
     };
     reader.readAsDataURL(file); // Converts image to Base64
 });
+
+/* Load saved NX7 theme */
+
+const savedTheme = localStorage.getItem("nx7Theme");
+
+if(savedTheme){
+  document.body.classList.add(savedTheme);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+            // ===============================
+            // NX7 DOG CATCH GAME - FIXED
+            // ==============================
+
+            // Select elements
+            const launchGameBtn = document.getElementById("launchGameBtn");
+            const dogGameWindow = document.getElementById("dogGameWindow");
+
+            const goBackFromGameBtn = document.getElementById("goBackFromGameBtn");
+            const closeDogGameBtn = document.getElementById("closeDogGameBtn");
+
+            const startDogGameBtn = document.getElementById("startDogGameBtn");
+            const restartDogGameBtn = document.getElementById("restartDogGameBtn");
+
+            const dogGameStart = document.getElementById("dogGameStart");
+            const dogGameArea = document.getElementById("dogGameArea");
+            const dogGameOver = document.getElementById("dogGameOver");
+
+            const dogTarget = document.getElementById("dogTarget");
+
+            const dogScore = document.getElementById("dogScore");
+            const finalDogScore = document.getElementById("finalDogScore");
+
+            // Game variables
+            let score = 0;
+            let animateInterval = null;
+            let gameTimer = null;
+            let moveSpeed = 6.0; // Lerp speed factor (higher = faster)
+            let targetX = 0;
+            let targetY = 0;
+
+            // OPEN GAME
+            if (launchGameBtn && dogGameWindow) {
+                launchGameBtn.addEventListener("click", () => {
+                    dogGameWindow.classList.remove("hidden");
+                });
+            }
+
+            // CLOSE GAME
+            function closeGame() {
+                if (!dogGameWindow) return;
+                dogGameWindow.classList.add("hidden");
+                stopGame();
+            }
+
+            if (goBackFromGameBtn) {
+                goBackFromGameBtn.addEventListener("click", closeGame);
+            }
+
+            if (closeDogGameBtn) {
+                closeDogGameBtn.addEventListener("click", closeGame);
+            }
+
+            // START GAME
+            if (startDogGameBtn) {
+                startDogGameBtn.addEventListener("click", startGame);
+            }
+
+            function startGame() {
+                score = 0;
+                moveSpeed = 4.0;
+
+                if (dogScore) dogScore.textContent = score;
+
+                dogGameStart?.classList.add("hidden");
+                dogGameOver?.classList.add("hidden");
+                dogGameArea?.classList.remove("hidden");
+
+                // Center dog initially
+                if (dogTarget && dogGameArea) {
+                    const rect = dogGameArea.getBoundingClientRect();
+                    dogTarget.style.left = rect.width / 2 + "px";
+                    dogTarget.style.top = rect.height / 2 + "px";
+                    targetX = rect.width / 2;
+                    targetY = rect.height / 2;
+                }
+
+                moveDog();
+                animateLoop();
+
+                // clearTimeout(gameTimer);
+                // gameTimer = setTimeout(endGame, 10000);
+            }
+
+            // MOVE DOG - Set new target position
+            function moveDog() {
+                if (!dogGameArea || !dogTarget) return;
+
+                const rect = dogGameArea.getBoundingClientRect();
+                const dogWidth = dogTarget.clientWidth || 90;
+                const dogHeight = dogTarget.clientHeight || 90;
+
+                targetX = Math.random() * (rect.width - dogWidth);
+                targetY = Math.random() * (rect.height - dogHeight);
+            }
+
+            // SMOOTH ANIMATION LOOP
+            function animateLoop() {
+                if (!dogGameArea || !dogTarget) return;
+
+                const rect = dogGameArea.getBoundingClientRect();
+                const dogWidth = dogTarget.clientWidth;
+                const dogHeight = dogTarget.clientHeight;
+
+                const currentLeft = parseFloat(dogTarget.style.left) || 0;
+                const currentTop = parseFloat(dogTarget.style.top) || 0;
+
+                // Smooth lerp movement
+                const newLeft = currentLeft + (targetX - currentLeft) * (moveSpeed / 100);
+                const newTop = currentTop + (targetY - currentTop) * (moveSpeed / 100);
+
+                dogTarget.style.left = newLeft + "px";
+                dogTarget.style.top = newTop + "px";
+
+                // Check if reached target, move to new position
+                if (Math.abs(targetX - newLeft) < 6 && Math.abs(targetY - newTop) < 6) {
+                    moveDog();
+                }
+
+                animateInterval = requestAnimationFrame(animateLoop);
+            }
+
+            // CATCH DOG
+            if (dogTarget) {
+                dogTarget.addEventListener("click", () => {
+                    score++;
+                    if (dogScore) dogScore.textContent = score;
+
+                    // Increase difficulty
+                    if (moveSpeed < 6) {
+                        moveSpeed += 0.2;
+                    }
+                });
+            }
+
+            // END GAME
+            function endGame() {
+                stopGame();
+                dogGameArea?.classList.add("hidden");
+                dogGameOver?.classList.remove("hidden");
+                if (finalDogScore) finalDogScore.textContent = score;
+            }
+
+            // STOP GAME
+            function stopGame() {
+                // clearTimeout(gameTimer);
+                if (animateInterval) {
+                    cancelAnimationFrame(animateInterval);
+                    animateInterval = null;
+                }
+            }
+
+            // RESTART
+            if (restartDogGameBtn) {
+                restartDogGameBtn.addEventListener("click", startGame);
+            }
+        });

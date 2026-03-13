@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html - <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -123,6 +123,7 @@
                         <h2>Welcome to NX7</h2>
                         <p>Select a chat to start messaging</p>
                     </div>
+                    
 
                     <!-- Active Chat Area -->
                     <div class="chatArea" id="chatArea">
@@ -171,8 +172,17 @@
                         </div>
 
                     </div> <!-- end chatArea -->
+                    <!-- ===============================
+     NX7 Mini Game Button Area
+================================ -->
+<div id="gameLaunchArea" class="gameLaunchArea">
+    <button id="launchGameBtn" class="launchGameBtn">
+        🎮 Let's Play a Game!
+    </button>
+</div>
 
                 </div> <!-- end chatWindow -->
+                
 
             </div> <!-- end Chat Page -->
 
@@ -226,7 +236,56 @@
         </div>
     </div>
 
-    <!-- JS -->
+
+
+    <!-- ===============================
+         NX7 Mini Game Button Area
+         Appears in the empty chat space
+         ============================== -->
+    
+
+    <!-- ===============================
+         Dog Catch Game Window
+         ============================== -->
+    <div id="dogGameWindow" class="dogGameWindow hidden">
+        <!-- Game Header -->
+        <div class="dogGameHeader">
+            <button id="goBackFromGameBtn" class="goBackFromGameBtn">
+                ⬅ Go Back
+            </button>
+            <h2>🐶 Catch The Dog</h2>
+            <button id="closeDogGameBtn" class="closeDogGameBtn">Exit</button>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="dogGameStart" class="dogGameStart">
+            <p>Click the dog as many times as possible!</p>
+            <button id="startDogGameBtn">Play</button>
+        </div>
+
+        <!-- Game Area -->
+        <div id="dogGameArea" class="dogGameArea hidden">
+            <!-- Score -->
+            <div class="dogGameScore">
+                Score: <span id="dogScore">0</span>
+            </div>
+
+            <!-- Dog Image -->
+            <img 
+                src="../../images/gameDog.jpg"
+                id="dogTarget"
+                class="dogTarget"
+                alt="Dog Target"
+            >
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="dogGameOver" class="dogGameOver hidden">
+            <h3>Game Over!</h3>
+            <p>Your Score: <span id="finalDogScore">0</span></p>
+            <button id="restartDogGameBtn">Play Again</button>
+        </div>
+    </div>
     <script src="../../js/chat.js"></script>
 </body>
 </html>

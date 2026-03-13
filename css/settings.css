@@ -483,3 +483,27 @@
     align-items: flex-start;
   }
 }
+/* ============================
+   NX7 Dark Mode
+   ============================ */
+
+.theme-dark{
+  background:#0f0f0f;
+  color:white;
+}
+
+.theme-dark .settingsSection{
+  background:#1a1a1a;
+}
+
+.theme-dark input,
+.theme-dark select{
+  background:#222;
+  color:white;
+  border-color:#444;
+}
+
+.theme-dark .btn{
+  background:#333;
+  color:white;
+}

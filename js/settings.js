@@ -122,3 +122,48 @@ document.addEventListener("DOMContentLoaded", () => {
   // -----------------------
   console.log("Settings page initialized.");
 });
+/* ============================
+   NX7 Theme System
+   ============================ */
+
+const themeSelect = document.getElementById("themeSelect");
+
+// apply saved theme on page load
+const savedTheme = localStorage.getItem("nx7Theme");
+
+if(savedTheme){
+  document.body.classList.add(savedTheme);
+  if(themeSelect) themeSelect.value = savedTheme.replace("theme-","");
+}
+
+// change theme when user selects option
+themeSelect?.addEventListener("change", () => {
+
+  const selected = themeSelect.value;
+
+  // remove old themes
+  document.body.classList.remove("theme-light","theme-dark");
+
+  if(selected === "dark"){
+    document.body.classList.add("theme-dark");
+    localStorage.setItem("nx7Theme","theme-dark");
+  }
+
+  if(selected === "light"){
+    document.body.classList.add("theme-light");
+    localStorage.setItem("nx7Theme","theme-light");
+  }
+
+  if(selected === "auto"){
+    document.body.classList.remove("theme-light","theme-dark");
+    localStorage.removeItem("nx7Theme");
+  }
+
+});
+/* Load saved NX7 theme */
+
+
+
+if(savedTheme){
+  document.body.classList.add(savedTheme);
+}

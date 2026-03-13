@@ -233,3 +233,11 @@ sortBy.addEventListener("change", () => {
 // ------------------------
 populateFilterOptions();
 renderGrid();
+
+/* Load saved NX7 theme */
+
+const savedTheme = localStorage.getItem("nx7Theme");
+
+if(savedTheme){
+  document.body.classList.add(savedTheme);
+}

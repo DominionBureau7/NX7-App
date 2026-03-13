@@ -34,3 +34,29 @@ function renderCalls() {
 
 // Render calls when page loads
 window.addEventListener("load", renderCalls);
+
+/* Load saved NX7 theme */
+
+const savedTheme = localStorage.getItem("nx7Theme");
+
+if(savedTheme){
+  document.body.classList.add(savedTheme);
+}
+// NX7 Go Back Button
+
+const goBackBtn = document.getElementById("goBackBtn");
+
+if(goBackBtn){
+    goBackBtn.addEventListener("click", () => {
+
+        // If user came from another page
+        if(document.referrer){
+            window.history.back();
+        }
+        else{
+            // fallback
+            window.location.href = "chat.html";
+        }
+
+    });
+}

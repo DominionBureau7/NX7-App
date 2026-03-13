@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       channels: [
         {
           title: 'AI Updates',
-          videoThumbnail: 'https://i.ytimg.com/an_webp/SVXTV69c2wQ/mqdefault_6s.webp?du=3000&sqp=CIT1yc0G&rs=AOn4CLCRpkynsu5PmN_n5gZdp0B57R8TeA',
+          videoThumbnail: '../../images/aiupdates.jpg',
           videoSrc: 'https://youtu.be/SVXTV69c2wQ'
         },
         {
@@ -408,3 +408,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('Initialization error in communities.js', err);
   }
 });
+/* Load saved NX7 theme */
+
+const savedTheme = localStorage.getItem("nx7Theme");
+
+if(savedTheme){
+  document.body.classList.add(savedTheme);
+}
